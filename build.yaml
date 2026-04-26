@@ -1,4 +1,4 @@
 ---
 include:
-  - board: nice_nano
+  - board: supermini_nrf52840
     shield: numpad18
