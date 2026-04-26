@@ -36,10 +36,10 @@ jobs:
         run: west zephyr-export
 
       - name: Build firmware
-        run: west build -s zmk/app -b nice_nano -- -DSHIELD=numpad18 -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+        run: west build -s zmk/app -b promicro_nrf52840 -- -DSHIELD=numpad18 -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
 
       - name: Upload firmware
         uses: actions/upload-artifact@v4
         with:
-          name: numpad18-nice_nano-zmk.uf2
+          name: numpad18-promicro_nrf52840-zmk.uf2
           path: build/zephyr/zmk.uf2
