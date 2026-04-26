@@ -19,12 +19,12 @@
 
         default_layer {
             bindings = <
-                &kp F13    &kp UP     &bspc_del DEL BSPC
+                &bootloader &kp UP     &bspc_del DEL BSPC
                 &kp LEFT   &kp DOWN   &kp RIGHT
                 &kp KP_N1  &kp KP_N2  &kp KP_N3
                 &kp KP_N4  &kp KP_N5  &kp KP_N6
                 &kp KP_N7  &kp KP_N8  &kp KP_N9
-                &kp F14    &kp SPACE  &bootloader
+                &kp F14    &kp SPACE  &kp F15
             >;
         };
     };
