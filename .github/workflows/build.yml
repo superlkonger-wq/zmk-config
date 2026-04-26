@@ -1,0 +1,45 @@
+name: Build ZMK Firmware
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container:
+      image: zmkfirmware/zmk-build-arm:stable
+    name: Build
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache west modules
+        uses: actions/cache@v4
+        with:
+          path: |
+            modules/
+            tools/
+            zephyr/
+            bootloader/
+            zmk/
+          key: west-build-${{ hashFiles('config/west.yml') }}
+
+      - name: West Init
+        run: west init -l config
+
+      - name: West Update
+        run: west update
+
+      - name: West Zephyr Export
+        run: west zephyr-export
+
+      - name: Build firmware
+        run: west build -s zmk/app -b nice_nano_v2 -- -DSHIELD=numpad18 -DZMK_CONFIG="${GITHUB_WORKSPACE}/config"
+
+      - name: Upload firmware
+        uses: actions/upload-artifact@v4
+        with:
+          name: numpad18-nice_nano_v2-zmk.uf2
+          path: build/zephyr/zmk.uf2
