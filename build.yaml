@@ -3,3 +3,4 @@ include:
   - board: nice_nano
     shield: numpad18
     snippet: studio-rpc-usb-uart
+    cmake-args: -DCONFIG_ZMK_STUDIO=y
